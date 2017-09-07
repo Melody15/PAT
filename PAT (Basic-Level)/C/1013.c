@@ -1,38 +1,38 @@
 #include <stdio.h>
-#define N 10000
+#include <math.h>
+
+int judge_pri(int x);
+int judge_pri(int x){
+	int i, t;
+	t = (int)sqrt((double)(x));
+	for(i = 2; i <= t; i++){
+		if(x % i == 0)
+			return 0;
+	
+	    if(i > t)
+	    	return 1;
+	}
+}
 
 int main()
-{ 
-  int m, n;
-  scanf("%d %d", &m, &n);
-  int i, k, j = 1;
-  int a[N+1];
-  a[j] = 2;
-  j++;
-  for(i = 3; i < 107500; i++){
-    for(k = 2; k < i; k++){
-      if(i % k == 0){
-        break;
-      }
-      if(k == i-1){
-        a[j] = i;
-        j++;
-      }
-    }
-    if(j > n) break;
-  }
-
-  int count = 0;
- 
-  for(i = m; i < n; i++){
-    if(count == 9){
-      printf("%d\n", a[i]);
-      count = 0;
-      continue;
-    }
-    printf("%d ", a[i]);
-    count++;
-  }
-  printf("%d", a[n]);
-  return 0;
+{
+	int m, n;
+	int i, j = 0, count = 0;
+	scanf("%d %d", &m, &n);
+	for(i = 2; count < n; i++){
+		if(judge_pri(i) && (count+1) < m){
+			count++;
+		}
+		else if(judge_pri(i) && (count+1) >= m){
+			printf("%d", i);
+			count++;
+			j++;
+			if(j % 10 == 0){
+				printf("\n");
+			}else if(j % 10 != 0 && count != n){
+				printf(" ");
+			}
+		}
+	}
+	return 0;
 }
