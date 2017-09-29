@@ -3,7 +3,6 @@
 
 A, B, D = list(map(int, input().split()))
 result = [0 for x in range(100)]
-
 sum = A + B
 
 if sum == 0:
