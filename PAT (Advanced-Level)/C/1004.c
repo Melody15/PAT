@@ -6,11 +6,14 @@ typedef struct child{
     int fatherid;
     struct child *nextchild;
 }Tchild, *Pchild;
+//the fatherid is not necessary, even could use a dyadic-array/vector to slove it
 
 typedef struct node{
     int level;
     struct child *childs;
 }Tnode, *Pnode;
+
+
 
 int main(int argc, char const *argv[]){
     int N, M;
@@ -34,7 +37,7 @@ int main(int argc, char const *argv[]){
         }
     }
 
-    int maxlevel = 0;   //modify the each node's level
+    int maxlevel = 0;   //modify the each node's level, and actually, the i is the fatherid
     for (int i = 1; i <= N; i++){
         int childid, fatherid;
         Pchild temp = nodes[i].childs;
@@ -52,20 +55,20 @@ int main(int argc, char const *argv[]){
         count = 0;
         for (int j = 1; j <= N; j++){
             if(nodes[j].level == i){
-            	if(nodes[j].childs == NULL)
-            		count++;
-			}
+                if(nodes[j].childs == NULL)
+                    count++;
+            }
         }
         if(i < maxlevel)
-        	printf("%d ", count);   
-		else
-			printf("%d", count); 
+            printf("%d ", count);   
+        else
+            printf("%d", count); 
     }
     return 0;
 }
 
 /*
-ÏÈ¶ÁÈ¡Ã¿¸önon-leaf½áµãµÄ×Ó½áµãÊý¾Ý£¬²¢½«Æä¹ÒÔÚ¸¸½ÚµãµÄÁ´±íÏÂ¡£
-ÔÚÑ­»·±éÀúÃ¿Ò»¸ö½áµã£¬ÐÞ¸ÄÆäÕýÈ·µÄlevel²ã´Î,²¢¼ÇÂ¼maxlevel
-×îºó¼ÆËãÃ¿Ò»²ãµÄnon-leafÊý 
+å…ˆè¯»å–æ¯ä¸ªnon-leafç»“ç‚¹çš„å­ç»“ç‚¹æ•°æ®ï¼Œå¹¶å°†å…¶æŒ‚åœ¨çˆ¶èŠ‚ç‚¹çš„é“¾è¡¨ä¸‹ã€‚
+åœ¨å¾ªçŽ¯éåŽ†æ¯ä¸€ä¸ªç»“ç‚¹ï¼Œä¿®æ”¹å…¶æ­£ç¡®çš„levelå±‚æ¬¡,å¹¶è®°å½•maxlevel
+æœ€åŽè®¡ç®—æ¯ä¸€å±‚çš„non-leafæ•° 
 */ 
